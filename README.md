@@ -4,6 +4,9 @@
 - ssh的使用
 - vscode联合remote-ssh使用
 
+## vim
+- 大部分人需要掌握的五步vim使用
+- 进阶vim
 ## protocol
 - AXI protocol
 - APB protocol
@@ -18,3 +21,6 @@
 - 功能覆盖率
 - 行覆盖率
 - UVM
+
+## git
+- git使用教程

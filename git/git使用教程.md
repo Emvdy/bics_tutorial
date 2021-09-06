@@ -261,11 +261,7 @@
 
 - 源代码管理器下面点击“循环”按钮，进行更新合并。（`git pull origin master + git push origin master`）
 
-https://www.jianshu.com/p/8c69d1021d98
+## git 进阶
 
-https://www.runoob.com/manual/git-guide/
-
-https://www.runoob.com/git/git-tutorial.html
-
-https://git-scm.com/book/en/v2
+[git官方书籍](https://git-scm.com/book/en/v2)
 

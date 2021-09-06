@@ -257,7 +257,9 @@
 
 #### 远程仓库->合并本地仓库->更新远程仓库
 
+![image-20210907003304993](figs/image-20210907003304993.png)
 
+- 源代码管理器下面点击“循环”按钮，进行更新合并。（`git pull origin master + git push origin master`）
 
 https://www.jianshu.com/p/8c69d1021d98
 

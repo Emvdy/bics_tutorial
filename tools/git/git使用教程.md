@@ -2,6 +2,18 @@
 
 # git使用技巧
 
+作者：左越
+
+日期：2021.9
+
+文档版本：V1.0
+
+### 修订记录
+
+| 日期     | 修订版本 | 描述                        | 作者 |
+| -------- | -------- | --------------------------- | ---- |
+| 2021-9-5 | V1.0     | git教程结构建立，内容填充。 | 左越 |
+
 ## git简介
 
 **什么是git：**git是一个开源的分布式版本控制系统，由Linus Tovarlds（Linux之父）创作，为了更好的管理Linux内核而开发设计的。
@@ -103,22 +115,33 @@
 
 ![image-20210906232357424](figs/image-20210906232357424.png)
 
-### 创建多人协作本地仓库
+### 创建单人、多人协作本地仓库
 
-- **使用情况：**文件有一定保密性，需要多人协同工作。
-- **前置条件：**创建者需要root权限，使用者需要在一个group。
+- **使用情况：**==必须使用==。
 - **仓库位置：**服务器共享文件夹，如`/home/public/git_repo`，便于集中管理。
 - **注明事项：**
   - 多人协作分工尽量明确，最好做到文件编辑独立，避免出现过多合并冲突。
-  - 使用`.gitignore`过滤提交的文件，忽略对一些文件的提交，例如波形文件，`.gitkeep`保留空文件夹。[.gitignore使用](https://www.cnblogs.com/yulinlewis/p/10231035.html)
+  - 使用`.gitignore`过滤提交的文件，忽略对一些文件的提交，例如波形文件，`.gitkeep`保留空文件夹。==建议只保留主要文件==。[.gitignore使用](https://www.cnblogs.com/yulinlewis/p/10231035.html)
 
 #### 创建仓库（创建者）
+
+1. 设置仓库对应group信息，提高安全性（可选，默认group为docker即可）：
+
+    ```bash
+    #首先查看group有没有对应组：
+    cat /etc/group
+    #需要设置组则打开group设置，必须要root权限。
+    sudo vim /etc/group
+    #按i切换到编辑模式，在最下面添加如下信息:类别（算法数字模拟器件）_项目名称:x:groupid:组内成员
+    class_projname:x:GID:group_members,
+    #按esc，输入:wq，回车结束保存。更新完，需要重新su yourname重登一下用户启动
+    ```
 
 1. 建立远程仓库：
 
     ```bash
-    #打开到对应路径下
-    cd /public_path
+    #打开到对应路径下，该路径所有人都可以创建git（需要设置sudo chmod 777 -R git_repo）
+    cd /home/public/git_repo/
     #创建仓库：--bare：空仓库，--share=group：分享到group使用者组，git_name：仓库名
     git init --bare --share=group git_name.git
     ```
@@ -128,7 +151,9 @@
     ```bash
     #修改仓库及其子目录下所有文件（-R）的权限为setGID——执行文件（即x）的用户以该文件所属组（group）的权限去执行。
     chmod g+s -R git_name.git
-    #修改仓库及其子目录下所有文件的所有者为owner_name，所属组为group_name。
+    #修改仓库及其子目录下所有文件的权限为组外不可读写执行（可选）。
+    chmod 770 -R git_name.git
+    #修改仓库及其子目录下所有文件的所有者为owner_name，所属组为group_name。这样只有你和group可以访问。（只有自己用的话不用执行，组内合作才需要）
     chown -R owner_name:group_name git_name.git/
     ```
 
